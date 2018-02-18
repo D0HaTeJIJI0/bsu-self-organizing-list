@@ -46,9 +46,9 @@ class SelfOrganizedList
 	if (index < this.length){
         	var curN = this.head;
 	        for (var i = 0; i < index; i++, curN = curN.next);
-            	return curN.data;
+            	return curN;
         }
-        else return 'error';
+        else return null;
     }
 
     findNode(data)
@@ -63,17 +63,18 @@ class SelfOrganizedList
 
     toArray()
     {
+	
+	var arr = [];
+	var i = 0;
+	var curN = this.head;
+	while (curN != this.tail){
+        	arr[i++] = curN.data;
+		curN = curN.next;
+        }
 	if (this.length > 0){
-		var arr = [];
-		var i = 0;
-		var curN = this.head;
-		while (curN != this.tail){
-        		arr[i++] = curN.data;
-			curN = curN.next;
-        	}
 		arr[i] = curN.data;
 	}
-	else return null;
+	return arr;
     }
 
     removeAt(index)
@@ -81,34 +82,39 @@ class SelfOrganizedList
 	if (index < this.length){
         	var curN = this.head;
 	        for (var i = 0; i < index; i++, curN = curN.next);
-		curN.next.prev = curN.prev;
-		curN.prev.next = cur.next;
+		if (curN.next != null) curN.next.prev = curN.prev;
+		if (curN.prev != null) curN.prev.next = cur.next;
+		curN = null;
+		this.length--;
         }
         else return 'error';
     }
 
     moveToFront(node)
     {
-	node.prev.next = node.next;
-	node.next.prev = node.prev;
+	if (node.prev != null) node.prev.next = node.next;
+	if (node.next != null) node.next.prev = node.prev;
 	node.next = this.head;
 	this.head.prev = node;
     }
 
     reorganize(data)
     {
-	var curN = this.head;
-        while (curN.data != data && curN != this.tail){
-        	curN = curN.next;
-        }
-        if (curN.data == data) {
-		curN.prev.next = curN.next;
-		curN.next.prev = curN.prev;
-		curN.next = this.head;
-		this.head.prev = curN;
-		return true;
+	if (head != null){
+		var curN = this.head;
+	        while (curN.data != data && curN != this.tail){
+	        	curN = curN.next;
+	        }
+	        if (curN.data == data) {
+			curN.prev.next = curN.next;
+			curN.next.prev = curN.prev;
+			curN.next = this.head;
+			this.head.prev = curN;
+			return true;
+		}
+	        else return false;
 	}
-        else return false;
+	else return false;
     }
 
 }
