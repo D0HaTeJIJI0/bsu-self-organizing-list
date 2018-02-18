@@ -115,12 +115,14 @@ class SelfOrganizedList
 	        	curN = curN.next;
 	        }
 	        if (curN.data == data) {
-			if (this.length != 1 && this.tail == curN) this.tail = curN.prev;
-			if (curN.prev != null) curN.prev.next = curN.next;
-			if (curN.next != null) curN.next.prev = curN.prev;
-			curN.next = this.head;
-			this.head.prev = curN;
-			this.head = curN;
+			if (this.length != 1){
+				if (curN.prev != null) curN.prev.next = curN.next;
+				if (curN.next != null) curN.next.prev = curN.prev;
+				if (this.tail == curN) this.tail = curN.prev;
+				curN.next = this.head;
+				this.head.prev = curN;
+				this.head = curN;
+			} 
 			return true;
 		}
 	        else return false;
@@ -130,7 +132,6 @@ class SelfOrganizedList
 
 }
 
-module.exports = {
-    SelfOrganizedList,
-    Node
-};
+var sol = new SelfOrganizedList();
+sol.insert(1);
+print(sol.reorganize(1));
