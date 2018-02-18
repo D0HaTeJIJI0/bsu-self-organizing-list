@@ -86,8 +86,8 @@ class SelfOrganizedList
 	        for (var i = 0; i < index; i++){
 			curN = curN.next;
 		}
-		if (curN = this.head) this.head = curN.next;
-		else if (curN = this.tail) this.tail = curN.prev;
+		if (curN == this.head) this.head = curN.next;
+		else if (curN == this.tail) this.tail = curN.prev;
 		if (curN.next != null) curN.next.prev = curN.prev;
 		if (curN.prev != null) curN.prev.next = curN.next;
 		curN = null;
