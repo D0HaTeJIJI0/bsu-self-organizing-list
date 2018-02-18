@@ -48,7 +48,7 @@ class SelfOrganizedList
 	        for (var i = 0; i < index; i++){
 			curN = curN.next;
 		}
-            	return curN;
+            	return curN.data;
         }
         else return null;
     }
@@ -86,8 +86,10 @@ class SelfOrganizedList
 	        for (var i = 0; i < index; i++){
 			curN = curN.next;
 		}
+		if (curN = this.head) this.head = curN.next;
+		else if (curN = this.tail) this.tail = curN.prev;
 		if (curN.next != null) curN.next.prev = curN.prev;
-		if (curN.prev != null) curN.prev.next = cur.next;
+		if (curN.prev != null) curN.prev.next = curN.next;
 		curN = null;
 		this.length--;
         }
@@ -113,8 +115,9 @@ class SelfOrganizedList
 	        	curN = curN.next;
 	        }
 	        if (curN.data == data) {
-			curN.prev.next = curN.next;
-			curN.next.prev = curN.prev;
+			if (this.length != 1 && this.tail == curN) this.tail = curN.prev;
+			if (curN.prev != null) curN.prev.next = curN.next;
+			if (curN.next != null) curN.next.prev = curN.prev;
 			curN.next = this.head;
 			this.head.prev = curN;
 			this.head = curN;
