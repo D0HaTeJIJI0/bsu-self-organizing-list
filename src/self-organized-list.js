@@ -132,6 +132,7 @@ class SelfOrganizedList
 
 }
 
-var sol = new SelfOrganizedList();
-sol.insert(1);
-print(sol.reorganize(1));
+module.exports = {
+    SelfOrganizedList,
+    Node
+};
