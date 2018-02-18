@@ -115,7 +115,7 @@ class SelfOrganizedList
 	        	curN = curN.next;
 	        }
 	        if (curN.data == data) {
-			if (this.length != 1){
+			if (curN != this.head){
 				if (curN.prev != null) curN.prev.next = curN.next;
 				if (curN.next != null) curN.next.prev = curN.prev;
 				if (this.tail == curN) this.tail = curN.prev;
